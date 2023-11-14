@@ -1,102 +1,49 @@
 import React, { useState } from "react";
-import "./authTabs.scss";
-import { FaGooglePlusG } from "react-icons/fa6";
-import { FaFacebookF } from "react-icons/fa";
-import { FaGithub } from "react-icons/fa";
-import { FaLinkedinIn } from "react-icons/fa";
+import "../auth.scss";
+import SignIn from "../signin/SignIn";
+import SignUp from "../signup/SignUp";
+import ForgotPassword from "../forgot-password/ForgotPassword";
 
 const AuthTabs = () => {
   const [isRegisterActive, setRegisterActive] = useState(false);
-
-  const handleRegisterClick = () => {
-    setRegisterActive(true);
-  };
-
-  const handleLoginClick = () => {
-    setRegisterActive(false);
-  };
-
-  const handlesignUp = (e) => {
-    e.preventDefault();
-    console.log("Handle Signup");
-  };
-
-  const handlesignIn = (e) => {
-    e.preventDefault();
-    console.log("Handle Signin");
-  };
-
+  const [isForgotPasswordActive, setForgotPasswordActive] = useState(false);
   return (
     <div className="auth__page">
+      <div className="credits">Set Your Heart Ablaze - Khalid</div>
       <div
-        class={`container ${isRegisterActive ? "active" : ""}`}
-        id="container"
+        className={`auth__container ${isRegisterActive ? "active" : ""}`}
+        id="auth__container"
       >
-        <div class="form-container sign-up">
-          <form onSubmit={handlesignUp}>
-            <h1>Create Account</h1>
-            <div class="social-icons">
-              <a href="/" target="_blank" class="icon">
-                <FaGooglePlusG />
-              </a>
-              <a href="/" target="_blank" class="icon">
-                <FaFacebookF />
-              </a>
-              <a href="/" target="_blank" class="icon">
-                <FaGithub />
-              </a>
-              <a href="/" target="_blank" class="icon">
-                <FaLinkedinIn />
-              </a>
-            </div>
-            <span>or use your email for registration</span>
-            <input type="text" placeholder="Name" />
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
-            <button>Sign Up</button>
-          </form>
-        </div>
-        <div class="form-container sign-in">
-          <form onSubmit={handlesignIn}>
-            <h1>Sign In</h1>
-            <div class="social-icons">
-              <a href="/" target="_blank" class="icon">
-                <FaGooglePlusG />
-              </a>
-              <a href="/" target="_blank" class="icon">
-                <FaFacebookF />
-              </a>
-              <a href="/" target="_blank" class="icon">
-                <FaGithub />
-              </a>
-              <a href="/" target="_blank" class="icon">
-                <FaLinkedinIn />
-              </a>
-            </div>
-            <span>or use your email password</span>
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
-            <a href="/" target="_blank">
-              Forget Your Password?
-            </a>
-            <button>Sign In</button>
-          </form>
-        </div>
-        <div class="toggle-container">
-          <div class="toggle">
+        {isForgotPasswordActive ? <ForgotPassword /> : <SignUp />}
+
+        <SignIn
+          tab={setRegisterActive}
+          forgotPassword={setForgotPasswordActive}
+        />
+        <div className="toggle-auth__container">
+          <div className="toggle">
             <div
-              class={`toggle-panel toggle-left ${
+              className={`toggle-panel toggle-left ${
                 isRegisterActive ? "active" : ""
               }`}
             >
               <h1>Welcome Back!</h1>
               <p>Enter your personal details to use all of the site features</p>
-              <button class="hidden" onClick={handleLoginClick} id="login">
+              <button
+                className="auth__button hidden"
+                onClick={() => {
+                  setRegisterActive(false);
+                  setTimeout(() => {
+                    setForgotPasswordActive(false);
+                  }, 500);
+                }}
+                id="login"
+              >
                 Sign In
               </button>
             </div>
             <div
-              class={`toggle-panel toggle-right ${
+              className={`toggle-panel toggle-right ${
                 isRegisterActive ? "" : "active"
               }`}
             >
@@ -106,8 +53,8 @@ const AuthTabs = () => {
                 features
               </p>
               <button
-                class="hidden"
-                onClick={handleRegisterClick}
+                className="auth__button hidden"
+                onClick={() => setRegisterActive(true)}
                 id="register"
               >
                 Sign Up
