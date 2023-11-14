@@ -1,0 +1,32 @@
+.keep__me__signedin__label {
+  display: flex;
+  width: 100%;
+  margin-left: 10px;
+  justify-content: flex-start;
+  margin-bottom: 15px;
+
+  .checkmark-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 13px;
+    cursor: pointer;
+    user-select: none;
+    margin-top: 5px;
+
+    input {
+      margin-right: 6px;
+      cursor: pointer;
+    }
+  }
+}
+
+.forgot__password__button {
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  color: #333;
+  font-size: 13px;
+  text-decoration: none;
+  margin: 15px 0 10px;
+}
