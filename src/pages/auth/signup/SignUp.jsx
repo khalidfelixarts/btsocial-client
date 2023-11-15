@@ -10,6 +10,7 @@ import {
 } from "../../../services/utils/utils.service";
 import { auth_signUp } from "../../../services/api/auth/auth.service";
 import { useNavigate } from "react-router-dom";
+import useLocalStorage from "../../../hooks/useLocalStorage";
 
 const SignUp = () => {
   const [username, setUsername] = useState("");
@@ -20,6 +21,9 @@ const SignUp = () => {
   const [alertType, setAlertType] = useState("");
   const [hasError, setHasError] = useState(false);
   const [user, setUser] = useState();
+  const [setStoredUsername] = useLocalStorage("username", "set");
+  const [setLoggedIn] = useLocalStorage("keepLoggedIn", "set");
+
   const navigate = useNavigate();
 
   const handlesignUp = async (e) => {
@@ -40,9 +44,13 @@ const SignUp = () => {
       });
 
       // set logged in to true in local storage
+      setLoggedIn(true);
+
       // set username in local storage
+      setStoredUsername(username);
+
       // dispatch user to redux
-      // console.log(result);
+
       setUser(result.data.user);
       setHasError(false);
       setAlertType("alert-success");
