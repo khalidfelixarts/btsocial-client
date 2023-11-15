@@ -4,13 +4,12 @@ import { FaFacebookF } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa";
 import { useState, useEffect } from "react";
-import {
-  generateAvatar,
-  getAvatarColor,
-} from "../../../services/utils/utils.service";
+import { Utils } from "../../../services/utils/utils.service";
 import { auth_signUp } from "../../../services/api/auth/auth.service";
 import { useNavigate } from "react-router-dom";
 import useLocalStorage from "../../../hooks/useLocalStorage";
+import { useDispatch } from "react-redux";
+import useSessionStorage from "../../../hooks/useSessionStorage";
 
 const SignUp = () => {
   const [username, setUsername] = useState("");
@@ -23,15 +22,17 @@ const SignUp = () => {
   const [user, setUser] = useState();
   const [setStoredUsername] = useLocalStorage("username", "set");
   const [setLoggedIn] = useLocalStorage("keepLoggedIn", "set");
+  const [pageReload] = useSessionStorage("pageReload", "set");
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handlesignUp = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const avatarColor = getAvatarColor();
-      const avatarImage = generateAvatar(
+      const avatarColor = Utils.getAvatarColor();
+      const avatarImage = Utils.generateAvatar(
         username.charAt(0).toUpperCase(),
         avatarColor
       );
@@ -51,9 +52,11 @@ const SignUp = () => {
 
       // dispatch user to redux
 
-      setUser(result.data.user);
       setHasError(false);
+
       setAlertType("alert-success");
+
+      Utils.dispatchUser(result, pageReload, dispatch, setUser);
     } catch (error) {
       setLoading(false);
       setHasError(true);
