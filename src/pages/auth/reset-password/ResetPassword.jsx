@@ -3,16 +3,17 @@ import "./resetPassword.scss";
 import "../auth.scss";
 import { auth_resetPassword } from "../../../services/api/auth/auth.service";
 import { useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const ResetPassword = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
   const [loading, setLoading] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [alertType, setAlertType] = useState("");
   const [responseMessage, setResponseMessage] = useState("");
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   const handleResetPassword = async (e) => {
     e.preventDefault();
@@ -31,6 +32,9 @@ const ResetPassword = () => {
       setShowAlert(false);
       setAlertType("alert-success");
       setResponseMessage(response?.data?.message);
+      setTimeout(() => {
+        navigate("/");
+      }, 4000);
     } catch (error) {
       setLoading(false);
       setShowAlert(true);
@@ -49,7 +53,11 @@ const ResetPassword = () => {
           <div className="alert__reset__password">
             {responseMessage && (
               <div className={`alerts ${alertType}`} role="alert">
-                {responseMessage}
+                {`${responseMessage}, ${
+                  alertType === "alert-success"
+                    ? "Redirecting To Login Page"
+                    : ""
+                }`}
               </div>
             )}
           </div>

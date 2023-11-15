@@ -5,7 +5,9 @@ import { FaGithub } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { auth_signIn } from "../../../services/api/auth/auth.service";
+import { useNavigate } from "react-router-dom";
 import "./signin.scss";
+import useLocalStorage from "../../../hooks/useLocalStorage";
 
 const SignIn = ({ forgotPassword, tab }) => {
   const [username, setUsername] = useState("");
@@ -16,6 +18,10 @@ const SignIn = ({ forgotPassword, tab }) => {
   const [alertType, setAlertType] = useState("");
   const [hasError, setHasError] = useState(false);
   const [user, setUser] = useState();
+  const [setStoredUsername] = useLocalStorage("username", "set");
+  const [setLoggedIn] = useLocalStorage("keepLoggedIn", "set");
+
+  const navigate = useNavigate();
 
   const handlesignIn = async (e) => {
     e.preventDefault();
@@ -25,11 +31,14 @@ const SignIn = ({ forgotPassword, tab }) => {
       const result = await auth_signIn({ username, password });
 
       // set logged in to true in local storage
+      setLoggedIn(keepLoggedIn);
+
       // set username in local storage
+      setStoredUsername(username);
+
       // dispatch user to redux
-      // console.log(result);
+
       setUser(result.data.user);
-      setKeepLoggedIn(keepLoggedIn);
       setHasError(false);
       setAlertType("alert-success");
     } catch (error) {
@@ -43,10 +52,9 @@ const SignIn = ({ forgotPassword, tab }) => {
   useEffect(() => {
     if (loading && !user) return;
     if (user) {
-      setLoading(false);
-      console.log("navigate feeds page from login page");
+      navigate("/media/feeds");
     }
-  }, [loading, user]);
+  }, [loading, user, navigate]);
 
   return (
     <>
