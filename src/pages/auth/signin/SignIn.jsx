@@ -8,6 +8,9 @@ import { auth_signIn } from "../../../services/api/auth/auth.service";
 import { useNavigate } from "react-router-dom";
 import "./signin.scss";
 import useLocalStorage from "../../../hooks/useLocalStorage";
+import useSessionStorage from "../../../hooks/useSessionStorage";
+import { Utils } from "../../../services/utils/utils.service";
+import { useDispatch } from "react-redux";
 
 const SignIn = ({ forgotPassword, tab }) => {
   const [username, setUsername] = useState("");
@@ -20,8 +23,10 @@ const SignIn = ({ forgotPassword, tab }) => {
   const [user, setUser] = useState();
   const [setStoredUsername] = useLocalStorage("username", "set");
   const [setLoggedIn] = useLocalStorage("keepLoggedIn", "set");
+  const [pageReload] = useSessionStorage("pageReload", "set");
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handlesignIn = async (e) => {
     e.preventDefault();
@@ -38,9 +43,11 @@ const SignIn = ({ forgotPassword, tab }) => {
 
       // dispatch user to redux
 
-      setUser(result.data.user);
       setHasError(false);
+
       setAlertType("alert-success");
+
+      Utils.dispatchUser(result, pageReload, dispatch, setUser);
     } catch (error) {
       setLoading(false);
       setHasError(true);
