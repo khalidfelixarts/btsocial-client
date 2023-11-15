@@ -9,6 +9,7 @@ import {
   getAvatarColor,
 } from "../../../services/utils/utils.service";
 import { auth_signUp } from "../../../services/api/auth/auth.service";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const [username, setUsername] = useState("");
@@ -19,6 +20,7 @@ const SignUp = () => {
   const [alertType, setAlertType] = useState("");
   const [hasError, setHasError] = useState(false);
   const [user, setUser] = useState();
+  const navigate = useNavigate();
 
   const handlesignUp = async (e) => {
     e.preventDefault();
@@ -55,10 +57,9 @@ const SignUp = () => {
   useEffect(() => {
     if (loading && !user) return;
     if (user) {
-      setLoading(false);
-      console.log("navigate feeds page");
+      navigate("/media/feeds");
     }
-  }, [loading, user]);
+  }, [loading, user, navigate]);
 
   return (
     <div className="form-auth__container sign-up">

@@ -5,6 +5,7 @@ import { FaGithub } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { auth_signIn } from "../../../services/api/auth/auth.service";
+import { useNavigate } from "react-router-dom";
 import "./signin.scss";
 
 const SignIn = ({ forgotPassword, tab }) => {
@@ -16,6 +17,7 @@ const SignIn = ({ forgotPassword, tab }) => {
   const [alertType, setAlertType] = useState("");
   const [hasError, setHasError] = useState(false);
   const [user, setUser] = useState();
+  const navigate = useNavigate();
 
   const handlesignIn = async (e) => {
     e.preventDefault();
@@ -43,10 +45,9 @@ const SignIn = ({ forgotPassword, tab }) => {
   useEffect(() => {
     if (loading && !user) return;
     if (user) {
-      setLoading(false);
-      console.log("navigate feeds page from login page");
+      navigate("/media/feeds");
     }
-  }, [loading, user]);
+  }, [loading, user, navigate]);
 
   return (
     <>

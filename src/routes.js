@@ -1,5 +1,5 @@
 import { useRoutes } from "react-router-dom";
-import { AuthTabs, ResetPassword } from "./pages";
+import { AuthTabs, ResetPassword, Feeds } from "./pages";
 
 export const AppRouter = () => {
   const elements = useRoutes([
@@ -10,6 +10,10 @@ export const AppRouter = () => {
     {
       path: "/reset-password",
       element: <ResetPassword />,
+    },
+    {
+      path: "/media/feeds",
+      element: <Feeds />,
     },
   ]);
 
