@@ -55,7 +55,7 @@ export class Utils {
   }) {
     dispatch(clearUser());
     // dispatch(clearNotification());
-    deleteStorageUsername();
+    // deleteStorageUsername();
     deleteSessionPageReload();
     setLoggedIn(false);
   }
