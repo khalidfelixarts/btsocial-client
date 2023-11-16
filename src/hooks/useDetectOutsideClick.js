@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 const useDetectOutsideClick = (ref, initialState) => {
   const [isActive, setIsActive] = useState(initialState);
@@ -11,11 +11,11 @@ const useDetectOutsideClick = (ref, initialState) => {
     };
 
     if (isActive) {
-      window.addEventListener('mousedown', onClick);
+      window.addEventListener("mousedown", onClick);
     }
 
     return () => {
-      window.removeEventListener('mousedown', onClick);
+      window.removeEventListener("mousedown", onClick);
     };
   }, [isActive, ref]);
 
