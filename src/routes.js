@@ -1,5 +1,5 @@
 import { useRoutes } from "react-router-dom";
-import { AuthTabs, ResetPassword, Feeds, App } from "./pages";
+import { AuthTabs, ResetPassword, Feeds, Profile, App } from "./pages";
 
 export const AppRouter = () => {
   const elements = useRoutes([
@@ -18,6 +18,10 @@ export const AppRouter = () => {
         {
           path: "feeds",
           element: <Feeds />,
+        },
+        {
+          path: "profile",
+          element: <Profile />,
         },
       ],
     },
