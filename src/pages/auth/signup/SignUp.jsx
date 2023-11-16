@@ -31,7 +31,7 @@ const SignUp = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const avatarColor = Utils.getAvatarColor();
+      const avatarColor = Utils.avatarColor();
       const avatarImage = Utils.generateAvatar(
         username.charAt(0).toUpperCase(),
         avatarColor
@@ -60,6 +60,7 @@ const SignUp = () => {
     } catch (error) {
       setLoading(false);
       setHasError(true);
+      console.log(error);
       setAlertType("alert-error");
       setErrorMessage(error?.response?.data?.message);
     }

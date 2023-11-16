@@ -8,10 +8,10 @@ const useLocalStorage = (key, type) => {
         window.localStorage.setItem(key, JSON.stringify(newValue));
       };
       return [setValue];
-    } else {
-      const deleteValue = () => {
+    } else if (type === "delete") {
+      function deleteValue() {
         window.localStorage.removeItem(key);
-      };
+      }
       return [deleteValue];
     }
   } catch (error) {
