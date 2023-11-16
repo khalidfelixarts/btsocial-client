@@ -74,16 +74,16 @@ const SignIn = ({ forgotPassword, tab }) => {
           )}
           <h1>Sign In</h1>
           <div className="social-icons">
-            <a href="/" target="_blank" className="icon">
+            <a href="/" target="_blank" className="auth__icon">
               <FaGooglePlusG />
             </a>
-            <a href="/" target="_blank" className="icon">
+            <a href="/" target="_blank" className="auth__icon">
               <FaFacebookF />
             </a>
-            <a href="/" target="_blank" className="icon">
+            <a href="/" target="_blank" className="auth__icon">
               <FaGithub />
             </a>
-            <a href="/" target="_blank" className="icon">
+            <a href="/" target="_blank" className="auth__icon">
               <FaLinkedinIn />
             </a>
           </div>

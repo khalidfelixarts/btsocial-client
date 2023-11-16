@@ -59,4 +59,15 @@ export class Utils {
     deleteSessionPageReload();
     setLoggedIn(false);
   }
+
+  static mapSettingsDropDownItems(setSettings) {
+    const items = [];
+    const item = {
+      topText: "My Profile",
+      subText: "View personal profile.",
+    };
+    items.push(item);
+    setSettings(items);
+    return items;
+  }
 }

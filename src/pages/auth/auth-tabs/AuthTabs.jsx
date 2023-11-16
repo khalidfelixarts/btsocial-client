@@ -11,7 +11,7 @@ const AuthTabs = () => {
     <div className="auth__page">
       <div className="credits">Set Your Heart Ablaze - Khalid</div>
       <div
-        className={`auth__container ${isRegisterActive ? "active" : ""}`}
+        className={`auth__container ${isRegisterActive ? "auth__active" : ""}`}
         id="auth__container"
       >
         {isForgotPasswordActive ? <ForgotPassword /> : <SignUp />}
@@ -24,7 +24,7 @@ const AuthTabs = () => {
           <div className="toggle">
             <div
               className={`toggle-panel toggle-left ${
-                isRegisterActive ? "active" : ""
+                isRegisterActive ? "auth__active" : ""
               }`}
             >
               <h1>Welcome Back!</h1>
@@ -44,7 +44,7 @@ const AuthTabs = () => {
             </div>
             <div
               className={`toggle-panel toggle-right ${
-                isRegisterActive ? "" : "active"
+                isRegisterActive ? "" : "auth__active"
               }`}
             >
               <h1>Hello, Friend!</h1>

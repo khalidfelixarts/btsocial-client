@@ -26,6 +26,7 @@ import {
   FaSun,
   FaMoon,
 } from "react-icons/fa";
+
 const Sidebar = () => {
   const { profile } = useSelector((state) => state.user);
   const location = useLocation();

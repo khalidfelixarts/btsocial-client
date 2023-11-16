@@ -82,16 +82,16 @@ const SignUp = () => {
         )}
         <h1>Create Account</h1>
         <div className="social-icons">
-          <a href="/" target="_blank" className="icon">
+          <a href="/" target="_blank" className="">
             <FaGooglePlusG />
           </a>
-          <a href="/" target="_blank" className="icon">
+          <a href="/" target="_blank" className="">
             <FaFacebookF />
           </a>
-          <a href="/" target="_blank" className="icon">
+          <a href="/" target="_blank" className="">
             <FaGithub />
           </a>
-          <a href="/" target="_blank" className="icon">
+          <a href="/" target="_blank" className="">
             <FaLinkedinIn />
           </a>
         </div>

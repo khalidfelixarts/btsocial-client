@@ -74,7 +74,7 @@
           font-size: 24px;
 
           .follow {
-            background-color: var(--primary-1);
+            background-color: var(--primary-color);
             color: var(--white-1);
             font-weight: 700;
             font-size: 14px;
@@ -91,7 +91,7 @@
 
     .view-more {
       grid-area: view-more;
-      color: var(--primary-1);
+      color: var(--primary-color);
       padding-bottom: 10px;
       height: 50px;
       display: flex;
