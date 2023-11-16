@@ -299,3 +299,14 @@ body.dark .app__home .text {
 .active__mode {
   opacity: 0;
 }
+
+.active {
+  background-color: var(--primary-color);
+  border-radius: 8px;
+  .icon {
+    color: white;
+  }
+  .text {
+    color: white;
+  }
+}

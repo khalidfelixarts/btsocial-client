@@ -2,11 +2,16 @@ import React, { useEffect, useState } from "react";
 import "./sidebar.scss";
 import LOGO from "../../../assets/images/logo.jpg";
 import { IoIosArrowForward } from "react-icons/io";
-import { Link } from "react-router-dom";
+import {
+  Link,
+  createSearchParams,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 import { IoIosSearch } from "react-icons/io";
 import { sideBarItems } from "../../../services/utils/static.data";
 import { MdLogout } from "react-icons/md";
-
+import { useSelector } from "react-redux";
 import {
   FaVideo,
   FaBirthdayCake,
@@ -22,6 +27,24 @@ import {
   FaMoon,
 } from "react-icons/fa";
 const Sidebar = () => {
+  const { profile } = useSelector((state) => state.user);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const navigateToPage = (name, url) => {
+    if (name === "Profile") {
+      url = `${url}/${profile?.username}?${createSearchParams({
+        id: profile?._id,
+        uId: profile?.uId,
+      })}`;
+      navigate(url);
+    }
+  };
+
+  const checkUrl = (name) => {
+    return location.pathname.includes(name.toLowerCase());
+  };
+
   const [themeMode, setThemeMode] = useState(true);
 
   useEffect(() => {
@@ -101,8 +124,12 @@ const Sidebar = () => {
             <ul className="menu-links">
               {/* MAP SIDE BAR COMPONENTS */}
               {sidebar.map((data) => (
-                <li key={data.index} className="nav-link">
-                  <Link to={data.url}>
+                <li
+                  key={data.index}
+                  className={`nav-link ${checkUrl(data.name) ? "active" : ""}`}
+                  onClick={() => navigateToPage(data.name, data.url)}
+                >
+                  <Link to={data.url === "/app/home/profile" ? "" : data.url}>
                     {fontAwesomeIcons[data.iconName]}
                     <span className="text nav-text">{data.name}</span>
                   </Link>

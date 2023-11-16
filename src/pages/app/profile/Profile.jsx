@@ -1,3 +1,5 @@
+import "./profile.scss";
+
 import React from "react";
 
 const Profile = () => {

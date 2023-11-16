@@ -68,7 +68,7 @@ const SignUp = () => {
   useEffect(() => {
     if (loading && !user) return;
     if (user) {
-      navigate("/media/feeds");
+      navigate("/app/home/feeds");
     }
   }, [loading, user, navigate]);
 

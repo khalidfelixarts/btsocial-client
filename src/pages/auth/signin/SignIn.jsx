@@ -59,7 +59,7 @@ const SignIn = ({ forgotPassword, tab }) => {
   useEffect(() => {
     if (loading && !user) return;
     if (user) {
-      navigate("/media/feeds");
+      navigate("/app/home/feeds");
     }
   }, [loading, user, navigate]);
 

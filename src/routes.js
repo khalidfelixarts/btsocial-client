@@ -1,5 +1,17 @@
 import { useRoutes } from "react-router-dom";
-import { AuthTabs, ResetPassword, Feeds, Profile, App } from "./pages";
+import {
+  AuthTabs,
+  ResetPassword,
+  Feeds,
+  Chat,
+  People,
+  Following,
+  Followers,
+  Photos,
+  Notifications,
+  Profile,
+  App,
+} from "./pages";
 
 export const AppRouter = () => {
   const elements = useRoutes([
@@ -20,7 +32,31 @@ export const AppRouter = () => {
           element: <Feeds />,
         },
         {
-          path: "profile",
+          path: "chat",
+          element: <Chat />,
+        },
+        {
+          path: "people",
+          element: <People />,
+        },
+        {
+          path: "following",
+          element: <Following />,
+        },
+        {
+          path: "followers",
+          element: <Followers />,
+        },
+        {
+          path: "photos",
+          element: <Photos />,
+        },
+        {
+          path: "notifications",
+          element: <Notifications />,
+        },
+        {
+          path: "profile/:username",
           element: <Profile />,
         },
       ],
