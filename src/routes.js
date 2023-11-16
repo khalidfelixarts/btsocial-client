@@ -12,6 +12,7 @@ import {
   Profile,
   App,
 } from "./pages";
+import ProtectedRoute from "./pages/ProtectedRoute";
 
 export const AppRouter = () => {
   const elements = useRoutes([
@@ -25,7 +26,11 @@ export const AppRouter = () => {
     },
     {
       path: "/app/home",
-      element: <App />,
+      element: (
+        // <ProtectedRoute>
+        <App />
+        // </ProtectedRoute>
+      ),
       children: [
         {
           path: "feeds",
