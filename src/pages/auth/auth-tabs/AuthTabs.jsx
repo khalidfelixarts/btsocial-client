@@ -1,12 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../auth.scss";
 import SignIn from "../signin/SignIn";
 import SignUp from "../signup/SignUp";
 import ForgotPassword from "../forgot-password/ForgotPassword";
+import useLocalStorage from "../../../hooks/useLocalStorage";
+import { useNavigate } from "react-router-dom";
 
 const AuthTabs = () => {
   const [isRegisterActive, setRegisterActive] = useState(false);
   const [isForgotPasswordActive, setForgotPasswordActive] = useState(false);
+
+  const keepLoggedIn = useLocalStorage("keepLoggedIn", "get");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (keepLoggedIn) navigate("/app/home/feeds");
+  }, [keepLoggedIn, navigate]);
+
   return (
     <div className="auth__page">
       <div className="credits">Set Your Heart Ablaze - Khalid</div>
