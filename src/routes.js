@@ -15,6 +15,7 @@ import {
 import ProtectedRoute from "./pages/ProtectedRoute";
 import Error from "./pages/error/Error";
 import { Suspense, lazy } from "react";
+import NotificationSkeleton from "./pages/app/notifications/NotificationSkeleton";
 
 const App = lazy(() => import("./pages/app/App"));
 const Chat = lazy(() => import("./pages/app/chat/Chat"));
@@ -97,7 +98,7 @@ export const AppRouter = () => {
         {
           path: "notifications",
           element: (
-            <Suspense>
+            <Suspense fallback={<NotificationSkeleton />}>
               <Notifications />
             </Suspense>
           ),
