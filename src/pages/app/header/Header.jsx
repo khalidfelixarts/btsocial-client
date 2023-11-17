@@ -58,11 +58,17 @@ const Header = () => {
         deleteSessionPageReload,
         setLoggedIn,
       });
+
       localStorage.removeItem("username");
       await user_logoutUser();
       navigate("/");
     } catch (error) {
       console.log(error);
+      Utils.dispatchNotification(
+        error.response.data.message,
+        "error",
+        dispatch
+      );
     }
   };
 

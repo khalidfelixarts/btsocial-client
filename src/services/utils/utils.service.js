@@ -5,6 +5,11 @@ import {
   clearUser,
 } from "../../redux-toolkit/reducers/user/user.reducer";
 
+import {
+  addNotification,
+  clearNotification,
+} from "../../redux-toolkit/reducers/notifications/notification.reducer";
+
 export class Utils {
   static avatarColor() {
     return avatarColors[floor(random(0.9) * avatarColors.length)];
@@ -54,10 +59,18 @@ export class Utils {
     setLoggedIn,
   }) {
     dispatch(clearUser());
-    // dispatch(clearNotification());
+    dispatch(clearNotification());
     // deleteStorageUsername();
     deleteSessionPageReload();
     setLoggedIn(false);
+  }
+
+  static dispatchNotification(message, type, dispatch) {
+    dispatch(addNotification({ message, type }));
+  }
+
+  static dispatchClearNotification(dispatch) {
+    dispatch(clearNotification());
   }
 
   static mapSettingsDropDownItems(setSettings) {
