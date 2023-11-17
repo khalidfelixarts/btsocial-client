@@ -3,6 +3,7 @@ import AuthTabs from "./auth/auth-tabs/AuthTabs";
 import ForgotPassword from "./auth/forgot-password/ForgotPassword";
 import ResetPassword from "./auth/reset-password/ResetPassword";
 import Feeds from "./app/feeds/Feeds";
+import FeedsSkeleton from "./app/feeds/FeedsSkeleton";
 import Chat from "./app/chat/Chat";
 import People from "./app/people/People";
 import Following from "./app/following/Following";
@@ -17,6 +18,7 @@ export {
   ForgotPassword,
   ResetPassword,
   Feeds,
+  FeedsSkeleton,
   Chat,
   People,
   Following,
