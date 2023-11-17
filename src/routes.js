@@ -13,6 +13,7 @@ import {
   App,
 } from "./pages";
 import ProtectedRoute from "./pages/ProtectedRoute";
+import Error from "./pages/error/Error";
 
 export const AppRouter = () => {
   const elements = useRoutes([
@@ -65,6 +66,10 @@ export const AppRouter = () => {
           element: <Profile />,
         },
       ],
+    },
+    {
+      path: "*",
+      element: <Error />,
     },
   ]);
 
