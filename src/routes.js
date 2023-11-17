@@ -27,9 +27,9 @@ export const AppRouter = () => {
     {
       path: "/app/home",
       element: (
-        // <ProtectedRoute>
-        <App />
-        // </ProtectedRoute>
+        <ProtectedRoute>
+          <App />
+        </ProtectedRoute>
       ),
       children: [
         {

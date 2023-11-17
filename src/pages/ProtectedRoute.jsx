@@ -29,6 +29,7 @@ const ProtectedRoute = ({ children }) => {
       const response = await user_currentUser();
       // dispatch(getConversationList());
       setUserData(response.data.user);
+      console.log(response.data.user);
       setTokenIsValid(true);
       dispatch(
         addUser({ token: response.data.token, profile: response.data.user })

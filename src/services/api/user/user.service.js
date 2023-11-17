@@ -12,6 +12,6 @@ export async function user_logoutUser() {
 }
 
 export async function user_currentUser() {
-  const response = await axios.get("/current-user");
+  const response = await axios.get("/currentuser");
   return response;
 }
