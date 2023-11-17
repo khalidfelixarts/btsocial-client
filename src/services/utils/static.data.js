@@ -1,3 +1,14 @@
+import blessed from "../../assets/feelings/blessed.jpg";
+import excited from "../../assets/feelings/excited.jpg";
+import happyFeelings from "../../assets/feelings/happy.jpg";
+import loved from "../../assets/feelings/loved.jpg";
+import angry from "../../assets/reactions/angry.png";
+import happy from "../../assets/reactions/happy.png";
+import like from "../../assets/reactions/like.png";
+import love from "../../assets/reactions/love.png";
+import sad from "../../assets/reactions/sad.png";
+import wow from "../../assets/reactions/wow.png";
+
 export const sideBarItems = [
   {
     index: 1,
@@ -75,3 +86,12 @@ export const avatarColors = [
   "#1de9b6",
   "#d84315",
 ];
+
+export const reactionsMap = {
+  like,
+  love,
+  wow,
+  sad,
+  happy,
+  angry,
+};
