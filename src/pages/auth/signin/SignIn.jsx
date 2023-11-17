@@ -46,7 +46,6 @@ const SignIn = ({ forgotPassword, tab }) => {
       setHasError(false);
 
       setAlertType("alert-success");
-
       Utils.dispatchUser(result, pageReload, dispatch, setUser);
     } catch (error) {
       setLoading(false);
