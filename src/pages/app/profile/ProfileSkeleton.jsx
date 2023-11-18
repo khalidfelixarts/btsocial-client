@@ -1,7 +1,7 @@
-import BackgroundHeaderSkeleton from '@components/background-header/BackgroundHeaderSkeleton';
-import PostSkeleton from '@components/posts/post/PostSkeleton';
-import PostFormSkeleton from '@components/posts/post-form/PostFormSkeleton';
-import { tabItems } from '@services/utils/static.data';
+import BackgroundHeaderSkeleton from "../../../components/background-header/BackgroundHeaderSkeleton";
+import PostSkeleton from "../../../components/posts/post/PostSkeleton";
+import PostFormSkeleton from "../../../components/posts/post-form/PostFormSkeleton";
+import { tabItems } from "../../../services/utils/static.data";
 
 const ProfileSkeleton = () => {
   return (
@@ -12,7 +12,7 @@ const ProfileSkeleton = () => {
         </div>
         <div className="profile-content">
           <div className="timeline-wrapper-container-main">
-            <div style={{ marginBottom: '10px' }}>
+            <div style={{ marginBottom: "10px" }}>
               <PostFormSkeleton />
             </div>
             <>
