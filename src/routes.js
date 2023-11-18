@@ -16,6 +16,7 @@ import ProtectedRoute from "./pages/ProtectedRoute";
 import Error from "./pages/error/Error";
 import { Suspense, lazy } from "react";
 import NotificationSkeleton from "./pages/app/notifications/NotificationSkeleton";
+import CardSkeleton from "./components/card-element/CardSkeleton";
 
 const App = lazy(() => import("./pages/app/App"));
 const Chat = lazy(() => import("./pages/app/chat/Chat"));
@@ -66,7 +67,7 @@ export const AppRouter = () => {
         {
           path: "people",
           element: (
-            <Suspense>
+            <Suspense fallback={<CardSkeleton />}>
               <People />
             </Suspense>
           ),
