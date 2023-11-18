@@ -18,6 +18,7 @@ import { Suspense, lazy } from "react";
 import NotificationSkeleton from "./pages/app/notifications/NotificationSkeleton";
 import CardSkeleton from "./components/card-element/CardSkeleton";
 import PhotoSkeleton from "./pages/app/photos/PhotoSkeleton";
+import ProfileSkeleton from "./pages/app/profile/ProfileSkeleton";
 
 const App = lazy(() => import("./pages/app/App"));
 const Chat = lazy(() => import("./pages/app/chat/Chat"));
@@ -108,7 +109,7 @@ export const AppRouter = () => {
         {
           path: "profile/:username",
           element: (
-            <Suspense>
+            <Suspense fallback={<ProfileSkeleton />}>
               <Profile />
             </Suspense>
           ),
