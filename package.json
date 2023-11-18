@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.2",
     "date-fns": "^2.30.0",
+    "env": "^0.0.2",
     "lodash": "^4.17.21",
     "millify": "^6.1.0",
     "react": "^18.2.0",

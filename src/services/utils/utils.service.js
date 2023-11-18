@@ -91,7 +91,8 @@ export class Utils {
       version = version.replace(/['"]+/g, "");
       id = id.replace(/['"]+/g, "");
     }
-    return `https://res.cloudinary.com/${process.env.CLOUD_NAME}/image/upload/v${version}/${id}`;
+
+    return `https://res.cloudinary.com/de0llaul4/image/upload/v${version}/${id}`;
   }
 
   static checkIfUserIsBlocked(blocked, userId) {
@@ -144,7 +145,7 @@ export class Utils {
 
   static getVideo(videoId, videoVersion) {
     return videoId && videoVersion
-      ? `https://res.cloudinary.com/${process.env.CLOUD_NAME}/video/upload/v${videoVersion}/${videoId}`
+      ? `https://res.cloudinary.com/de0llaul4/video/upload/v${videoVersion}/${videoId}`
       : "";
   }
 
