@@ -12,7 +12,7 @@ const Posts = ({ allPosts, userFollowing, postsLoading }) => {
   const [posts, setPosts] = useState([]);
   const [following, setFollowing] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { _id } = useSelector((state) => state.user.profile);
+  // const { _id } = useSelector((state) => state.user.profile);
 
   useEffect(() => {
     setPosts(allPosts);
@@ -31,7 +31,7 @@ const Posts = ({ allPosts, userFollowing, postsLoading }) => {
               <>
                 {PostUtils.checkPrivacy(post, profile, following) && (
                   <>
-                    <Post post={post} showIcons={post.userId === _id} />
+                    <Post post={post} showIcons={false} />
                   </>
                 )}
               </>
