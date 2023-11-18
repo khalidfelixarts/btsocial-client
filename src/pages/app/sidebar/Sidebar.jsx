@@ -11,7 +11,7 @@ import {
 import { IoIosSearch } from "react-icons/io";
 import { sideBarItems } from "../../../services/utils/static.data";
 import { MdLogout } from "react-icons/md";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   FaVideo,
   FaBirthdayCake,
@@ -26,6 +26,10 @@ import {
   FaSun,
   FaMoon,
 } from "react-icons/fa";
+import { Utils } from "../../../services/utils/utils.service";
+import useLocalStorage from "../../../hooks/useLocalStorage";
+import useSessionStorage from "../../../hooks/useSessionStorage";
+import { user_logoutUser } from "../../../services/api/user/user.service";
 
 const Sidebar = () => {
   const { profile } = useSelector((state) => state.user);
@@ -96,6 +100,34 @@ const Sidebar = () => {
     setSidebar(sideBarItems);
   }, []);
 
+  const [setLoggedIn] = useLocalStorage("keepLoggedIn", "set");
+  const dispatch = useDispatch();
+  const [deleteStoredUsername] = useLocalStorage("username", "delete");
+  const [deleteSessionPageReload] = useSessionStorage("pageReload", "delete");
+
+  const onLogout = async () => {
+    try {
+      setLoggedIn(false);
+      Utils.clearStore({
+        dispatch,
+        deleteStoredUsername,
+        deleteSessionPageReload,
+        setLoggedIn,
+      });
+
+      localStorage.removeItem("username");
+      await user_logoutUser();
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      Utils.dispatchNotification(
+        error.response.data.message,
+        "error",
+        dispatch
+      );
+    }
+  };
+
   return (
     <>
       <nav className="sidebar close">
@@ -140,11 +172,17 @@ const Sidebar = () => {
           </div>
 
           <div className="bottom-content">
-            <li className="nav-link">
-              <Link to="#">
+            <li
+              style={{ cursor: "pointer" }}
+              className="nav-link"
+              onClick={() => {
+                onLogout();
+              }}
+            >
+              <a>
                 <MdLogout className="icon" />
                 <span className="text nav-text">Logout</span>
-              </Link>
+              </a>
             </li>
 
             <li className="mode">

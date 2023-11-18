@@ -8,8 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useSearchParams } from "react-router-dom";
 import { followerService } from "../../../services/api/followers/follower.service";
 import { Utils } from "../../../services/utils/utils.service";
-import { userService } from "../../../services/api/user/user.service";
-import { FollowersUtils } from "../../../services/utils/followers-utils.service";
+import { user_getUserProfileByUsername } from "../../../services/api/user/user.service";
+import { FollowersUtils } from "../../../services/utils/utils.followers.service";
 import { socketService } from "../../../services/socket/socket.service";
 import useEffectOnce from "../../../hooks/useEffectOnce";
 
@@ -40,7 +40,7 @@ const FollowerCard = ({ userData }) => {
 
   const getUserProfileByUsername = async () => {
     try {
-      const response = await userService.getUserProfileByUsername(
+      const response = await user_getUserProfileByUsername(
         username,
         searchParams.get("id"),
         searchParams.get("uId")
