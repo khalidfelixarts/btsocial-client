@@ -17,6 +17,7 @@ import Error from "./pages/error/Error";
 import { Suspense, lazy } from "react";
 import NotificationSkeleton from "./pages/app/notifications/NotificationSkeleton";
 import CardSkeleton from "./components/card-element/CardSkeleton";
+import PhotoSkeleton from "./pages/app/photos/PhotoSkeleton";
 
 const App = lazy(() => import("./pages/app/App"));
 const Chat = lazy(() => import("./pages/app/chat/Chat"));
@@ -57,7 +58,7 @@ export const AppRouter = () => {
           ),
         },
         {
-          path: "chat",
+          path: "chat/messages",
           element: (
             <Suspense>
               <Chat />
@@ -91,7 +92,7 @@ export const AppRouter = () => {
         {
           path: "photos",
           element: (
-            <Suspense>
+            <Suspense fallback={<PhotoSkeleton />}>
               <Photos />
             </Suspense>
           ),
