@@ -1,13 +1,13 @@
 import "./feeds.scss";
 import SuggestionsSkeletons from "../../../components/suggestions/SuggestionsSkeleton";
+import PostFormSkeleton from "../../../components/posts/post-form/PostFormSkeleton";
 
 const FeedsSkeleton = () => {
   return (
     <div className="feeds">
       <div className="feeds-content">
         <div className="feeds-post">
-          {/* <PostFormSkeleton /> */}
-          <div>Post Form</div>
+          <PostFormSkeleton />
           {[1, 2, 3, 4, 5, 6].map((index) => (
             <div key={index}>
               {/* <PostSkeleton /> */}

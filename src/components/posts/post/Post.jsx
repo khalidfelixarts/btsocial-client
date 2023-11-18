@@ -1,0 +1,253 @@
+import Avatar from "../../avatar/Avatar";
+import { timeAgo } from "../../../services/utils/utils.timeago";
+import PropTypes from "prop-types";
+import { FaPencilAlt, FaRegTrashAlt } from "react-icons/fa";
+import { find } from "lodash";
+import { feelingsList, privacyList } from "../../../services/utils/static.data";
+import "./post.scss";
+import PostCommentSection from "../../posts/post-comment-section/PostCommentSection";
+import { useDispatch, useSelector } from "react-redux";
+import ReactionsModal from "../../posts/reactions/reactions-modal/ReactionsModal";
+import { Utils } from "../../../services/utils/utils.service";
+import useLocalStorage from "../../../hooks/useLocalStorage";
+import CommentInputBox from "../../posts/comments/comment-input/CommentInputBox";
+import CommentsModal from "../../posts/comments/comments-modal/CommentsModal";
+import { useState, useEffect } from "react";
+import ImageModal from "../../image-modal/ImageModal";
+import {
+  openModal,
+  toggleDeleteDialog,
+} from "../../../redux-toolkit/reducers/modal/modal.reducer";
+import {
+  clearPost,
+  updatePostItem,
+} from "../../../redux-toolkit/reducers/post/post.reducer";
+import Dialog from "../../dialog/Dialog";
+import { postService } from "../../../services/api/post/post.service";
+import { ImageUtils } from "../../../services/utils/utils.image.service";
+
+const Post = ({ post, showIcons }) => {
+  const { _id } = useSelector((state) => state.post);
+  const { reactionsModalIsOpen, commentsModalIsOpen, deleteDialogIsOpen } =
+    useSelector((state) => state.modal);
+  const [showImageModal, setShowImageModal] = useState(false);
+  const [imageUrl, setImageUrl] = useState("");
+  const [backgroundImageColor, setBackgroundImageColor] = useState("");
+  const selectedPostId = useLocalStorage("selectedPostId", "get");
+  const dispatch = useDispatch();
+
+  const getFeeling = (name) => {
+    const feeling = find(feelingsList, (data) => data.name === name);
+    return feeling?.image;
+  };
+
+  const getPrivacy = (type) => {
+    const privacy = find(privacyList, (data) => data.topText === type);
+    return privacy?.icon;
+  };
+
+  const deletePost = async () => {
+    try {
+      const response = await postService.deletePost(_id);
+      if (response) {
+        Utils.dispatchNotification(response.data.message, "success", dispatch);
+        dispatch(toggleDeleteDialog({ toggle: !deleteDialogIsOpen }));
+        dispatch(clearPost());
+      }
+    } catch (error) {
+      Utils.dispatchNotification(
+        error.response.data.message,
+        "error",
+        dispatch
+      );
+    }
+  };
+
+  const openPostModal = () => {
+    dispatch(openModal({ type: "edit" }));
+    dispatch(updatePostItem(post));
+  };
+
+  const openDeleteDialog = () => {
+    dispatch(toggleDeleteDialog({ toggle: !deleteDialogIsOpen }));
+    dispatch(updatePostItem(post));
+  };
+
+  const getBackgroundImageColor = async (post) => {
+    let imageUrl = "";
+    if (post?.imgId && !post?.gifUrl && post.bgColor === "#ffffff") {
+      imageUrl = Utils.getImage(post.imgId, post.imgVersion);
+    } else if (post?.gifUrl && post.bgColor === "#ffffff") {
+      imageUrl = post?.gifUrl;
+    }
+    const bgColor = await ImageUtils.getBackgroundImageColor(imageUrl);
+    setBackgroundImageColor(bgColor);
+  };
+
+  useEffect(() => {
+    getBackgroundImageColor(post);
+  }, [post]);
+
+  return (
+    <>
+      {reactionsModalIsOpen && <ReactionsModal />}
+      {commentsModalIsOpen && <CommentsModal />}
+      {showImageModal && (
+        <ImageModal
+          image={`${imageUrl}`}
+          onCancel={() => setShowImageModal(!showImageModal)}
+          showArrow={false}
+        />
+      )}
+      {deleteDialogIsOpen && (
+        <Dialog
+          title="Are you sure you want to delete this post?"
+          firstButtonText="Delete"
+          secondButtonText="Cancel"
+          firstBtnHandler={() => deletePost()}
+          secondBtnHandler={() => {
+            dispatch(toggleDeleteDialog({ toggle: !deleteDialogIsOpen }));
+            dispatch(clearPost());
+          }}
+        />
+      )}
+      <div className="post-body">
+        <div className="user-post-data">
+          <div className="user-post-data-wrap">
+            <div className="user-post-image">
+              <Avatar
+                name={post?.username}
+                bgColor={post?.avatarColor}
+                textColor="#ffffff"
+                size={50}
+                avatarSrc={post?.profilePicture}
+              />
+            </div>
+            <div className="user-post-info">
+              <div className="inline-title-display">
+                <h5>
+                  {post?.username}
+                  {post?.feelings && (
+                    <div className="inline-display">
+                      is feeling{" "}
+                      <img
+                        className="feeling-icon"
+                        src={`${getFeeling(post?.feelings)}`}
+                        alt=""
+                      />{" "}
+                      <div>{post?.feelings}</div>
+                    </div>
+                  )}
+                </h5>
+                {showIcons && (
+                  <div className="post-icons">
+                    <FaPencilAlt className="pencil" onClick={openPostModal} />
+                    <FaRegTrashAlt
+                      className="trash"
+                      onClick={openDeleteDialog}
+                    />
+                  </div>
+                )}
+              </div>
+
+              {post?.createdAt && (
+                <p className="time-text-display">
+                  {timeAgo.transform(post?.createdAt)} &middot;{" "}
+                  {getPrivacy(post?.privacy)}
+                </p>
+              )}
+            </div>
+            <hr />
+            <div
+              className="user-post"
+              style={{ marginTop: "1rem", borderBottom: "" }}
+            >
+              {post?.post && post?.bgColor === "#ffffff" && (
+                <p className="post">{post?.post}</p>
+              )}
+              {post?.post && post?.bgColor !== "#ffffff" && (
+                <div
+                  className="user-post-with-bg"
+                  style={{ background: `${post?.bgColor}` }}
+                >
+                  {post?.post}
+                </div>
+              )}
+
+              {/* POST WITH GIFs */}
+              {post?.gifUrl && post.bgColor === "#ffffff" && (
+                <div
+                  className="image-display-flex"
+                  style={{
+                    height: "600px",
+                    backgroundColor: `${backgroundImageColor}`,
+                  }}
+                  onClick={() => {
+                    setImageUrl(post?.gifUrl);
+                    setShowImageModal(!showImageModal);
+                  }}
+                >
+                  <img
+                    className="post-image"
+                    style={{ objectFit: "contain" }}
+                    src={`${post?.gifUrl}`}
+                    alt=""
+                  />
+                </div>
+              )}
+
+              {/* POST WITH IMAGE */}
+              {post?.imgId && !post?.gifUrl && post.bgColor === "#ffffff" && (
+                <div
+                  className="image-display-flex"
+                  style={{
+                    height: "600px",
+                    backgroundColor: `${backgroundImageColor}`,
+                  }}
+                  onClick={() => {
+                    setImageUrl(Utils.getImage(post.imgId, post.imgVersion));
+                    setShowImageModal(!showImageModal);
+                  }}
+                >
+                  <img
+                    className="post-image"
+                    style={{ objectFit: "contain" }}
+                    src={`${Utils.getImage(post.imgId, post.imgVersion)}`}
+                    alt=""
+                  />
+                </div>
+              )}
+
+              {/* POST WITH VIDEO */}
+              {post?.videoId && post.bgColor === "#ffffff" && (
+                <div
+                  className="image-display-flex"
+                  style={{ height: "600px", backgroundColor: "#000000" }}
+                >
+                  <video
+                    width="100%"
+                    height="600px"
+                    autoPlay={true}
+                    controls
+                    src={`${Utils.getVideo(post.videoId, post.videoVersion)}`}
+                  />
+                </div>
+              )}
+
+              {(post?.reactions.length > 0 || post?.commentsCount > 0) && (
+                <hr />
+              )}
+              <PostCommentSection post={post} />
+            </div>
+          </div>
+          {selectedPostId === post?._id && <CommentInputBox post={post} />}
+        </div>
+      </div>
+    </>
+  );
+};
+Post.propTypes = {
+  post: PropTypes.object.isRequired,
+  showIcons: PropTypes.bool,
+};
+export default Post;
