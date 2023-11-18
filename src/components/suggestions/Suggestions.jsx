@@ -4,13 +4,32 @@ import Avatar from "../avatar/Avatar";
 import Button from "../button/Button";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { Utils } from "../../services/utils/utils.service";
+import { FollowersUtils } from "../../services/utils/utils.followers.service";
+import { filter } from "lodash";
+import { addToSuggestions } from "../../redux-toolkit/reducers/suggestions/suggestions.reducer";
 
 const Suggestions = () => {
   const { suggestions } = useSelector((state) => state);
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
-  const followUser = () => {};
+  const dispatch = useDispatch();
+
+  const followUser = async (user) => {
+    try {
+      FollowersUtils.followUser(user, dispatch);
+      const result = filter(users, (data) => data?._id !== user?._id);
+      setUsers(result);
+      dispatch(addToSuggestions({ users: result, isLoading: false }));
+    } catch (error) {
+      Utils.dispatchNotification(
+        error.response.data.message,
+        "error",
+        dispatch
+      );
+    }
+  };
 
   useEffect(() => {
     setUsers(suggestions?.users);
@@ -48,7 +67,7 @@ const Suggestions = () => {
         {users.length > 8 && (
           <div
             className="view-more"
-            onClick={() => navigate("/app/home/people")}
+            onClick={() => navigate("/app/social/people")}
           >
             View More
           </div>
