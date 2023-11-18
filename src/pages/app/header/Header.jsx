@@ -24,6 +24,7 @@ import { notificationService } from "../../../services/api/notifications/notific
 import { NotificationUtils } from "../../../services/utils/utils.notification.service";
 import { socketService } from "../../../services/socket/socket.service";
 import NotificationPreview from "../../../components/dialog/NotificationPreview";
+import { sumBy } from "lodash";
 
 const Header = () => {
   const { profile } = useSelector((state) => state.user);
@@ -164,14 +165,14 @@ const Header = () => {
       "header",
       setNotificationCount
     );
-    // NotificationUtils.socketIOMessageNotification(
-    //   profile,
-    //   messageNotifications,
-    //   setMessageNotifications,
-    //   setMessageCount,
-    //   dispatch,
-    //   location
-    // );
+    NotificationUtils.socketIOMessageNotification(
+      profile,
+      messageNotifications,
+      setMessageNotifications,
+      setMessageCount,
+      dispatch,
+      location
+    );
   }, [profile, notifications, dispatch, location, messageNotifications]);
 
   return (
