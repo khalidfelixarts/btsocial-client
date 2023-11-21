@@ -1,4 +1,6 @@
 :root {
+  --backgound-color: linear-gradient(to right, #ffdafe, #87a3ff) !important;
+  --name-text: #000000;
   --white-1: #ffffff;
   --white-2: #eeeeee;
   --white-3: #e5e6e7;
@@ -26,6 +28,7 @@
   --black-6: #565656;
   --black-7: #3f3f3f;
   // --primary-1: #50b5ff;
+
   --primary-1: #695cfe;
   --primary-2: #00c6fb;
   --primary-3: #1876f2;
@@ -72,7 +75,7 @@
 
   /* ===== Colors ===== */
   --body-color: #e4e9f7;
-  --sidebar-color: #fff;
+  --sidebar-color: #ffffff;
   --primary-color: #695cfe;
   --primary-color-light: #f6f5ff;
   --sidebarToggle-color: #ddd;
@@ -83,4 +86,82 @@
   --tran-03: all 0.3s ease;
   --tran-04: all 0.3s ease;
   --tran-05: all 0.3s ease;
+}
+
+body.dark {
+  --backgound-color: linear-gradient(to right, #171317, #080a0f) !important;
+  --body-color: #18191a;
+  --sidebar-color: #242526;
+  --primary-color: #3a3b3c;
+  --primary-color-light: #3a3b3c;
+  --sidebarToggle-color: #fff;
+  --text-color: #ccc;
+
+  --name-text: #ffffff;
+  --white-1: #000000;
+  --white-2: #111111;
+  --white-3: #1a1918;
+  --white-4: #0e0e0e;
+  --white-5: #0e0f0f;
+  --white-6: #050504;
+  --white-7: #0a0400;
+  --white-8: #211e18;
+  --white-9: #1b1914;
+  --white-10: #0f0d0a;
+  --white-11: #0c0b0a;
+  --white-12: #222222;
+  --white-13: #312f2b;
+  --white-14: #0a0400;
+  --white-15: #424242;
+  --white-16: #171610;
+  --white-17: #312b25;
+  --white-18: #333333;
+  --white-19: #100e09;
+  --black-1: #ffffff;
+  --black-2: #e3e1de;
+  --black-3: #c0beb2;
+  --black-4: #f9f9f9;
+  --black-5: #fafafa;
+  --black-6: #a9a9a9;
+  --black-7: #c0c0c0;
+}
+
+.profile-name {
+  color: white !important;
+}
+
+.header-profile-name {
+  color: var(--text-color) !important;
+}
+
+.name {
+  color: var(--name-text) !important;
+}
+.count {
+  color: var(--name-text) !important;
+}
+
+.no-information {
+  color: var(--black-6);
+}
+
+.feeds-post {
+  background: var(--body-color) !important;
+}
+
+p,
+span {
+  color: var(--black-6);
+}
+
+.photos {
+  color: var(--black-1);
+}
+
+.subtext {
+  color: var(--black-6) !important;
+}
+
+.form-label {
+  color: var(--black-6) !important;
 }

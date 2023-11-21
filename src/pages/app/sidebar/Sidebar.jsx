@@ -26,6 +26,8 @@ import {
   FaSun,
   FaMoon,
 } from "react-icons/fa";
+import { IoIosColorPalette } from "react-icons/io";
+
 import { Utils } from "../../../services/utils/utils.service";
 import useLocalStorage from "../../../hooks/useLocalStorage";
 import useSessionStorage from "../../../hooks/useSessionStorage";
@@ -128,8 +130,40 @@ const Sidebar = () => {
     }
   };
 
+  ///////////////////////////////////////////////////////////////////////////
+  ////////////////////////// THEME TAB /////////////////////////////////////
+  const [isThemeActive, setIsThemeActive] = useState(false);
+  const [color, setColor] = useState("default");
+
+  function setPrimaryColor(color) {
+    const body = document.querySelector("body");
+    body.classList.toggle(`${color}`);
+  }
+
   return (
     <>
+      {isThemeActive && (
+        <div className="theme__tab__parent">
+          <div className="theme__settings">
+            <div className="theme__top">
+              <span>Theme Settings</span>
+              <span
+                style={{ cursor: "pointer" }}
+                onClick={() => {
+                  setIsThemeActive(!isThemeActive);
+                }}
+              >
+                X
+              </span>
+            </div>
+            <div className="theme__bottom">
+              {/* ADD THEME BUTTONS */}
+
+              {/*  */}
+            </div>
+          </div>
+        </div>
+      )}
       <nav className="sidebar close">
         <div className="header">
           <div className="image-text">
@@ -172,6 +206,18 @@ const Sidebar = () => {
           </div>
 
           <div className="bottom-content">
+            <li
+              style={{ cursor: "pointer" }}
+              className="nav-link"
+              onClick={() => {
+                setIsThemeActive(!isThemeActive);
+              }}
+            >
+              <a>
+                <IoIosColorPalette className="icon" />
+                <span className="text nav-text">Theme</span>
+              </a>
+            </li>
             <li
               style={{ cursor: "pointer" }}
               className="nav-link"

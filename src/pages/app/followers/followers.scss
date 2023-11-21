@@ -1,3 +1,7 @@
+.followers {
+  color: var(--black-1);
+}
+
 .card-element {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));

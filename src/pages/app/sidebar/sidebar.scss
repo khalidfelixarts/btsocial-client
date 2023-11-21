@@ -14,18 +14,18 @@ body {
 }
 
 ::selection {
-  background-color: var(--primary-color);
+  background: var(--primary-color);
   color: #fff;
 }
 
-body.dark {
-  --body-color: #18191a;
-  --sidebar-color: #242526;
-  --primary-color: #3a3b3c;
-  --primary-color-light: #3a3b3c;
-  --sidebarToggle-color: #fff;
-  --text-color: #ccc;
-}
+// body.dark {
+//   --body-color: #18191a;
+//   --sidebar-color: #242526;
+//   --primary-color: #3a3b3c;
+//   --primary-color-light: #3a3b3c;
+//   --sidebarToggle-color: #fff;
+//   --text-color: #ccc;
+// }
 
 /* ===== Sidebar ===== */
 .sidebar {
@@ -133,7 +133,7 @@ body.dark {
   transform: translateY(-50%) rotate(180deg);
   height: 25px;
   width: 25px;
-  background-color: var(--primary-color);
+  background: var(--primary-color);
   color: var(--sidebar-color);
   border-radius: 50%;
   display: flex;
@@ -158,7 +158,7 @@ body.dark .sidebar .header .sidebarToggle {
 
 .sidebar li.search-box {
   border-radius: 6px;
-  background-color: var(--primary-color-light);
+  background: var(--primary-color-light);
   cursor: pointer;
   transition: var(--tran-05);
 }
@@ -168,7 +168,7 @@ body.dark .sidebar .header .sidebarToggle {
   width: 100%;
   outline: none;
   border: none;
-  background-color: var(--primary-color-light);
+  background: var(--primary-color-light);
   color: var(--text-color);
   border-radius: 6px;
   font-size: 17px;
@@ -178,7 +178,7 @@ body.dark .sidebar .header .sidebarToggle {
 .sidebar li a {
   list-style: none;
   height: 100%;
-  background-color: transparent;
+  background: transparent;
   display: flex;
   align-items: center;
   height: 100%;
@@ -189,7 +189,7 @@ body.dark .sidebar .header .sidebarToggle {
 }
 
 .sidebar li a:hover {
-  background-color: var(--primary-color);
+  background: var(--primary-color);
 }
 .sidebar li a:hover .icon,
 .sidebar li a:hover .text {
@@ -212,7 +212,7 @@ body.dark .sidebar li a:hover .text {
 }
 .sidebar .menu-bar .mode {
   border-radius: 6px;
-  background-color: var(--primary-color-light);
+  background: var(--primary-color-light);
   position: relative;
   transition: var(--tran-05);
 }
@@ -233,7 +233,7 @@ body.dark .sidebar li a:hover .text {
   height: 22px;
   width: 40px;
   border-radius: 25px;
-  background-color: var(--sidebarToggle-color);
+  background: var(--sidebarToggle-color);
   transition: var(--tran-05);
 }
 
@@ -246,7 +246,7 @@ body.dark .sidebar li a:hover .text {
   top: 50%;
   left: 5px;
   transform: translateY(-50%);
-  background-color: var(--sidebar-color);
+  background: var(--sidebar-color);
   transition: var(--tran-04);
 }
 
@@ -261,7 +261,7 @@ body.dark .switch::before {
   left: 250px;
   height: 100vh;
   width: calc(100% - 250px);
-  background-color: var(--body-color);
+  background: var(--body-color);
   transition: var(--tran-05);
 }
 .app__home .text {
@@ -301,12 +301,65 @@ body.dark .app__home .text {
 }
 
 .active {
-  background-color: var(--primary-color);
+  background: var(--primary-color);
   border-radius: 8px;
   .icon {
     color: white;
   }
   .text {
     color: white;
+  }
+}
+
+.theme__tab__parent {
+  z-index: 9999999999999;
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+  background: #42424252;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99;
+
+  .theme__settings {
+    height: 350px;
+    width: 500px;
+    border-radius: 20px;
+    background: var(--white-18);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .theme__top {
+      width: 100%;
+      height: 8%;
+      background: var(--primary-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      span {
+        margin-left: 15px;
+        margin-right: 15px;
+        color: white !important;
+      }
+    }
+    .theme__bottom {
+      width: 100%;
+      height: 92%;
+      background: var(--body-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    .color__item {
+      height: 50px;
+      width: 120px;
+      margin: 8px;
+      border-radius: 5px;
+    }
   }
 }
