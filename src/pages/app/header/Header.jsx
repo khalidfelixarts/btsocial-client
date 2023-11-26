@@ -297,7 +297,7 @@ const Header = () => {
                     avatarSrc={profile?.profilePicture}
                   />
                 </span>
-                <span className="header-list-name profile-name">
+                <span className="header-list-name profile-name header-profile-name">
                   {profile?.username}
                   {!isSettingsActive ? (
                     <FaCaretDown className="header-list-icon caret" />

@@ -1,7 +1,7 @@
 @mixin bar-styles {
   width: 25px;
   height: 3px;
-  background-color: var(--black-7);
+  background: var(--black-7);
   margin: 5px auto;
   transition: all 0.3s ease-in-out;
 }
@@ -9,7 +9,7 @@
 .header-nav-wrapper {
   width: 100%;
   top: 0;
-  background-color: var(--sidebar-color);
+  background: var(--sidebar-color);
   position: sticky;
   z-index: 20;
   height: 70px;
@@ -72,7 +72,7 @@
       .bar {
         @include bar-styles;
 
-        background-color: var(--primary-color);
+        background: var(--primary-color);
         width: 20px;
         height: 2px;
         cursor: pointer;
@@ -105,7 +105,7 @@
           }
 
           .bg-primary-dots {
-            background-color: var(--primary-color);
+            background: var(--primary-color);
             right: 12px;
             animation: shadow-pulse 1s infinite;
           }

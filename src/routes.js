@@ -19,6 +19,8 @@ import NotificationSkeleton from "./pages/app/notifications/NotificationSkeleton
 import CardSkeleton from "./components/card-element/CardSkeleton";
 import PhotoSkeleton from "./pages/app/photos/PhotoSkeleton";
 import ProfileSkeleton from "./pages/app/profile/ProfileSkeleton";
+// import Spinner from "./components/spinner/Spinner";
+import ChatSkeleton from "./pages/app/chat/ChatSkeleton";
 
 const App = lazy(() => import("./pages/app/App"));
 const Chat = lazy(() => import("./pages/app/chat/Chat"));
@@ -61,7 +63,7 @@ export const AppRouter = () => {
         {
           path: "chat/messages",
           element: (
-            <Suspense>
+            <Suspense fallback={<ChatSkeleton />}>
               <Chat />
             </Suspense>
           ),

@@ -38,7 +38,9 @@ const AuthTabs = () => {
               }`}
             >
               <h1>Welcome Back!</h1>
-              <p>Enter your personal details to use all of the site features</p>
+              <p className="auth__p">
+                Enter your personal details to use all of the site features
+              </p>
               <button
                 className="auth__button hidden"
                 onClick={() => {
@@ -58,7 +60,7 @@ const AuthTabs = () => {
               }`}
             >
               <h1>Hello, Friend!</h1>
-              <p>
+              <p className="auth__p">
                 Register with your personal details to use all of the site
                 features
               </p>
